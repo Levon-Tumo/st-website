@@ -1,14 +1,11 @@
-// Add some interactivity and cool effects
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Parallax effect for hero section
     const hero = document.querySelector('#hero');
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
     });
 
-    // Flickering light effect for the title
     const title = document.querySelector('.title');
     setInterval(() => {
         if (Math.random() < 0.1) {
@@ -22,9 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500);
 
-    // Smooth scrolling for navigation
     document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
@@ -34,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add floating effect to character cards
+
     const cards = document.querySelectorAll('.character-card');
     cards.forEach(card => {
         let floatY = 0;
         let floatDirection = 1;
-        
+
         setInterval(() => {
             floatY += (0.2 * floatDirection);
             if (floatY > 5) floatDirection = -1;
@@ -48,23 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     });
 
-    // Add eerie background sound effect on hover over upside-down section
+
     const upsideDown = document.querySelector('#upside-down');
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
+
     upsideDown.addEventListener('mouseenter', () => {
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
-        
+
         oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(50, audioContext.currentTime);
         gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        
+
         oscillator.start();
-        
+
         upsideDown.addEventListener('mouseleave', () => {
             oscillator.stop();
         }, { once: true });
